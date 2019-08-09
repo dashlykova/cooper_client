@@ -1,4 +1,5 @@
 export const CooperCalculator = (distance, gender, age) => {
+
   const ratings = [
     'Excellent',
     'Above average',
@@ -45,13 +46,13 @@ export const CooperCalculator = (distance, gender, age) => {
       case age >= 50:
         return '50+';
       default:
-        return 'Invalid range';
+        return 'invalid range';
     }
-  };
+  }
 
   const ageRange = ageRangeTable(parseInt(age));
 
-  if(ageRange === 'Invalid range') {
+  if (ageRange === 'invalid range') {
     return 'Invalid age range';
   }
 
@@ -63,9 +64,9 @@ export const CooperCalculator = (distance, gender, age) => {
 
   distanceRanges.forEach((dRange, index) => {
     if (
-      (dRange.match(/>\d*/) && distance >= parseInt(dRange.slice(1), 10))||
+      (dRange.match(/>\d*/) && distance >= parseInt(dRange.slice(1), 10)) ||
       (dRange.match(/<\d*/) && distance < parseInt(dRange.slice(1), 10))
-    ){
+    ) {
       ratingIndex = index;
     } else {
       const minMax = dRange.split('-');
@@ -80,4 +81,4 @@ export const CooperCalculator = (distance, gender, age) => {
   return ratings[ratingIndex];
 }
 
-export default CooperCalculator
+export default CooperCalculator;

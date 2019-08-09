@@ -37,8 +37,8 @@ class App extends Component {
 
         <DisplayCooperResult
           distance={this.state.distance}
-          age={this.state.age}
           gender={this.state.gender}
+          age={this.state.age}
         />
       </div>
     );
