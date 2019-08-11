@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DisplayCooperResult from './Components/DisplayCooperResult';
 import InputFields from './Components/InputFields';
 import LoginForm from './Components/LoginForm';
-import {authenticate} from './Modules/Auth';
+import { authenticate } from './Modules/Auth';
 
 class App extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   onChange(event) {
+    debugger;
     this.setState({
       [event.target.id]: event.target.value
     })
@@ -34,18 +35,32 @@ class App extends Component {
     }
   }
   render() {
-    let renderLogin
+    let renderLogin;
+    let user;
 
-    if (this.state.renderLoginForm === true) {
+    if (this.state.authenticated === true) {
+      user = JSON.parse(sessionStorage.getItem('credentials')).uid;
       renderLogin = (
-        <LoginForm
-          loginHandler={this.onLogin.bind(this)} 
-          inputChangeHandler={this.onChange.bind(this)}/>
+        <p>Hi {user}</p>
       )
     } else {
-      renderLogin = (
-        <button id='login' onClick={() => this.setState({ renderLoginForm: true })}>Login</button>
-      )
+      if (this.state.renderLoginForm === true) {
+        renderLogin = (
+          <>
+            <LoginForm
+              loginHandler={this.onLogin.bind(this)}
+              inputChangeHandler={this.onChange.bind(this)}
+            />
+          </>
+        )
+      } else {
+        renderLogin = (
+          <>
+            <button id="login" onClick={() => this.setState({ renderLoginForm: true })}>Login</button>
+            <p>{this.state.message}</p>
+          </>
+        )
+      }
     }
     return (
       <div>
@@ -54,12 +69,13 @@ class App extends Component {
         />
 
         {/* <button id='login'>Login</button> */}
-        <LoginForm />
+        {/* <LoginForm /> */}
 
         <DisplayCooperResult
           distance={this.state.distance}
           gender={this.state.gender}
           age={this.state.age}
+          authenticated={this.state.authenticated}
         />
         {renderLogin}
       </div>
