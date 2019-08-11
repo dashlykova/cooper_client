@@ -42,4 +42,3 @@ describe('User can log in', () => {
     cy.contains('Invalid login credentials. Please try again.')
   })
 })
-  
