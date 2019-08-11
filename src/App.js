@@ -15,13 +15,17 @@ class App extends Component {
       authenticated: false,
       email: '',
       password: '',
-      message: ''
+      message: '',
+      entrySaved: false
     }
   }
-
+  entryHandler() {
+    this.setState({ entrySaved: true });
+  }
   onChange(event) {
     this.setState({
-      [event.target.id]: event.target.value
+      [event.target.id]: event.target.value,
+      entrySaved: false
     })
   }
   async onLogin(e) {
@@ -75,6 +79,8 @@ class App extends Component {
           gender={this.state.gender}
           age={this.state.age}
           authenticated={this.state.authenticated}
+          entrySaved={this.state.entrySaved}
+          entryHandler={this.entryHandler.bind(this)}
         />
         {renderLogin}
       </div>
