@@ -20,7 +20,6 @@ class App extends Component {
   }
 
   onChange(event) {
-    debugger;
     this.setState({
       [event.target.id]: event.target.value
     })
