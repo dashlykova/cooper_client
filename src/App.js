@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DisplayCooperResult from './Components/DisplayCooperResult';
 import InputFields from './Components/InputFields';
 import LoginForm from './Components/LoginForm';
+import {authenticate} from './Modules/Auth';
 
 class App extends Component {
   constructor(props) {
@@ -37,7 +38,9 @@ class App extends Component {
 
     if (this.state.renderLoginForm === true) {
       renderLogin = (
-        <LoginForm />
+        <LoginForm
+          loginHandler={this.onLogin.bind(this)} 
+          inputChangeHandler={this.onChange.bind(this)}/>
       )
     } else {
       renderLogin = (
@@ -50,7 +53,7 @@ class App extends Component {
           inputChangeHandler={this.onChange.bind(this)}
         />
 
-        <button id='login'>Login</button>
+        {/* <button id='login'>Login</button> */}
         <LoginForm />
 
         <DisplayCooperResult
